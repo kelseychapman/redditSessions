@@ -1,8 +1,37 @@
-body {
+/*body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}*/
+
+.commentRepeater{
+  margin-top: 5px;
+}
+
+.post-bottom {
+  position:absolute;
+  bottom: 0px;
+}
+
+.post-body {
+  position: relative;
+}
+
+.post-comments {
+  position: relative;
+  bottom:0px;
+  margin-left: 128px;
+}
+
+.glyphicon-arrow-up:hover, .glyphicon-pencil:hover{
+  color: orange;
+  cursor: pointer;
+}
+
+.glyphicon-arrow-down:hover, .glyphicon-comment:hover{
+  color: dodgerblue;
+  cursor:pointer;
 }
