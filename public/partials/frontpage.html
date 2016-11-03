@@ -4,12 +4,12 @@
             <div class="media post-body">
                 <div class=media-left>
                     <a href=#>
-                        <img src="http://c.dryicons.com/images/icon_sets/stylistica_icons_set/png/128x128/photo.png" class=media-object data-src=holder.js/64x64>
+                        <img src={{post.img}} class=media-object>
                     </a>
                 </div>
                 <div class=media-body>
                     <h4 class=media-heading>{{post.title}}</h4>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                    {{post.body}}
                     <div class="post-bottom">
                         <div ng-switch on="post.showCommentsBool">
                             <span ng-click='increment(post)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>

@@ -1,36 +1,36 @@
-app.controller('main', function($scope){
+app.controller('main', function($scope, postsService) {
 
-  $scope.arr = [
-    {
-      title: 'A title',
-      comments: [1,2,3],
-      author: 'James',
-      showCommentsBool: false,
-      voteCount: 2
-    },
-    {
-      title:'B Title ',
-      comments: [1],
-      author: 'Sasha',
-      showCommentsBool: false,
-      voteCount: 2
-    }
-  ]
-
+  postsService.getPosts().then(function(results) {
+    console.log('logging in controller: ', results);
+    $scope.arr = results
+  })
 
   $scope.sortType = '-voteCount'
   $scope.sortDisplay = "Votes"
 
-  $scope.increment = function(post){
+  $scope.increment = function(post) {
     post.voteCount++
   }
 
-  $scope.decrement = function(post){
+  $scope.decrement = function(post) {
     post.voteCount--
   }
 
-  $scope.toggleComments = function(post){
-    if (post.showCommentsBool){
+  $scope.postFormBool = false;
+
+  $scope.changeBool = function() {
+    console.log('current pfb: ', $scope.postFormBool);
+    if ($scope.postFormBool == false) {
+      console.log('Changing to true');
+      $scope.postFormBool = true;
+    } else {
+      console.log('changing to false');
+      $scope.postFormBool = false;
+    }
+  }
+
+  $scope.toggleComments = function(post) {
+    if (post.showCommentsBool) {
       post.showCommentsBool = false
     } else {
       post.showCommentsBool = true
@@ -39,7 +39,7 @@ app.controller('main', function($scope){
 
 
 
-  $scope.sortBy = function(input){
+  $scope.sortBy = function(input) {
     console.log('sortBy clicked');
     $scope.sortType = input;
     if (input == '-voteCount') {

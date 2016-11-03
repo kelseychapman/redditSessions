@@ -45,6 +45,7 @@
                                 <li class="click" ng-click="sortBy('title')">Title</li>
                             </ul>
                         </li>
+                        <li ng-click="changeBool()"><a href="">+ Submit a post</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -76,6 +77,38 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
+        <form name="postForm" ng-show="postFormBool" ng-submit="submit()">
+            <div ng-class="{'has-error':postForm.title.$invalid && postForm.title.$dirty, 'has-success': postForm.title.$valid}" class="form-group">
+              <label class="control-label" for="title">Title:</label>
+              <input class="form-control" id="title" ng-model="title" type="text" name="title" placeholder="Title" ng-minlength="3" ng-maxlength="255" required>
+              <div class="error" ng-show="postForm.title.$invalid && postForm.title.$dirty">
+                Title must be between 3 and 255 characters.
+              </div>
+            </div>
+            <div ng-class="{'has-error':postForm.author.$invalid && postForm.author.$dirty, 'has-success': postForm.author.$valid}" class="form-group">
+              <label class=control-label class=control-label for="author">Author:</label>
+              <input class="form-control" id="author" ng-model="author" type="text" name="author" placeholder="Author" ng-minlength="3" ng-maxlength="36" required>
+              <div class="error" ng-show="postForm.author.$invalid && postForm.author.$dirty">
+                Author name must be between 3 and 36 characters.
+              </div>
+            </div>
+            <div ng-class="{'has-error':postForm.image.$invalid && postForm.image.$dirty, 'has-success': postForm.image.$valid}" class="form-group">
+              <label class=control-label for="image">Image source:</label>
+              <input type="text" class="form-control" id="image" ng-model="image" type="text" name="image" placeholder="Image source" ng-pattern="/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/" required>
+              <div class="error" ng-show="postForm.image.$invalid && postForm.image.$dirty">
+                Please enter a valid URL.
+              </div>
+            </div>
+            <div ng-class="{'has-error':postForm.description.$invalid && postForm.description.$dirty, 'has-success': postForm.description.$valid && postForm.description.$dirty}" class="form-group">
+              <label class=control-label for="description">Description:</label>
+              <input class="form-control" id="description" ng-model="description" type="text" name="description" placeholder="Description" ng-maxlength="10000">
+              <div class="error" ng-show="postForm.description.$invalid && postForm.description.$dirty">
+                Please enter a valid description.
+              </div>
+            </div>
+            <input type="submit">
+          </form>
+
         <ng-view></ng-view>
     </body>
 </html>
