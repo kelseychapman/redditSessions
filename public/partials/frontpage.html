@@ -8,7 +8,7 @@
                     </a>
                 </div>
                 <div class=media-body>
-                    <h4 class=media-heading>{{post.title}}</h4><h6>posted by</h6>
+                    <h4 class=media-heading>{{post.title}}</h4><h6>posted by {{post.username}}</h6>
                     {{post.body}}
                     <div class="post-bottom">
                         <div ng-switch on="post.showCommentsBool">
