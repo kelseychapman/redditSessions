@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var knex = require('../db/knex.js')
+const express = require('express');
+const router = express.Router();
+const knex = require('../db/knex.js')
+const bcrypt = require('bcrypt')
 
 /* GET home page. */
 router.get('/allposts', function(req, res, next) {

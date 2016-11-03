@@ -1,5 +1,4 @@
 app.controller('main', function($scope, postsService) {
-
   $scope.newPostObj = {}
   $scope.postFormBool = false;
   $scope.sortType = '-voteCount'
