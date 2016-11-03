@@ -77,38 +77,37 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-        <form name="postForm" ng-show="postFormBool" ng-submit="submit()">
+        <form name="postForm" ng-show="postFormBool" ng-submit="newPost(newPostObj)">
             <div ng-class="{'has-error':postForm.title.$invalid && postForm.title.$dirty, 'has-success': postForm.title.$valid}" class="form-group">
               <label class="control-label" for="title">Title:</label>
-              <input class="form-control" id="title" ng-model="title" type="text" name="title" placeholder="Title" ng-minlength="3" ng-maxlength="255" required>
+              <input class="form-control" id="title" ng-model="newPostObj.title" type="text" name="title" placeholder="Title" ng-minlength="3" ng-maxlength="255" required>
               <div class="error" ng-show="postForm.title.$invalid && postForm.title.$dirty">
                 Title must be between 3 and 255 characters.
               </div>
             </div>
-            <div ng-class="{'has-error':postForm.author.$invalid && postForm.author.$dirty, 'has-success': postForm.author.$valid}" class="form-group">
-              <label class=control-label class=control-label for="author">Author:</label>
-              <input class="form-control" id="author" ng-model="author" type="text" name="author" placeholder="Author" ng-minlength="3" ng-maxlength="36" required>
-              <div class="error" ng-show="postForm.author.$invalid && postForm.author.$dirty">
-                Author name must be between 3 and 36 characters.
+            <div ng-class="{'has-error':postForm.authorID.$invalid && postForm.authorID.$dirty, 'has-success': postForm.authorID.$valid}" class="form-group">
+              <label class=control-label class=control-label for="authorID">Author:</label>
+              <input class="form-control" id="authorID" ng-model="newPostObj.authorID" type="text" name="authorID" placeholder="Author ID" required>
+              <div class="error" ng-show="postForm.authorID.$invalid && postForm.authorID.$dirty">
+                Please enter a valid ID.
               </div>
             </div>
             <div ng-class="{'has-error':postForm.image.$invalid && postForm.image.$dirty, 'has-success': postForm.image.$valid}" class="form-group">
               <label class=control-label for="image">Image source:</label>
-              <input type="text" class="form-control" id="image" ng-model="image" type="text" name="image" placeholder="Image source" ng-pattern="/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/" required>
+              <input type="text" class="form-control" id="image" ng-model="newPostObj.image" type="text" name="image" placeholder="Image source" ng-pattern="/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/" required>
               <div class="error" ng-show="postForm.image.$invalid && postForm.image.$dirty">
                 Please enter a valid URL.
               </div>
             </div>
             <div ng-class="{'has-error':postForm.description.$invalid && postForm.description.$dirty, 'has-success': postForm.description.$valid && postForm.description.$dirty}" class="form-group">
               <label class=control-label for="description">Description:</label>
-              <input class="form-control" id="description" ng-model="description" type="text" name="description" placeholder="Description" ng-maxlength="10000">
+              <input class="form-control" id="description" ng-model="newPostObj.description" type="text" name="description" placeholder="Description" ng-maxlength="10000">
               <div class="error" ng-show="postForm.description.$invalid && postForm.description.$dirty">
                 Please enter a valid description.
               </div>
             </div>
             <input type="submit">
           </form>
-
         <ng-view></ng-view>
     </body>
 </html>

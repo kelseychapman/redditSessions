@@ -7,6 +7,10 @@ a {
   color: #00B7FF;
 }*/
 
+.mediaHolder {
+  height: 133px;
+}
+
 .commentRepeater{
   margin-top: 5px;
 }
