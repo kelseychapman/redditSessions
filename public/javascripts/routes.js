@@ -5,4 +5,9 @@ app.config(function($routeProvider){
     templateUrl: '../partials/frontpage.html',
     controller: 'main'
   })
+
+  .when('/loginsignup', {
+    templateUrl: '../partials/loginsignup.html',
+    controller: 'auth'
+  })
 })
