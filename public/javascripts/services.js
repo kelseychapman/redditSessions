@@ -12,19 +12,3 @@ app.service('postsService', function($http){
     }
   }
 })
-
-app.service('authService', function($http){
-  return {
-    signup: function(newUser){
-      return $http.post('/api/newuser', newUser, {withCredentials:true}).then(function(response){
-        return response.data
-      })
-    },
-    login: function(userCredentials){
-      console.log('login service called: ', userCredentials, {withCredentials: true});
-      return $http.post('/api/login', userCredentials).then(function(response){
-        return response.data
-      })
-    }
-  }
-})
