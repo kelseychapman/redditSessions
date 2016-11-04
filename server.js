@@ -22,7 +22,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cookieSession({
   name: 'redditSession',
-  secret: 'doesntmatter'
+  secret: 'doesntmatter',
+  httpOnly: false
 }))
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -45,13 +46,15 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
+    console.log('and here is the error: ', err );
+    res.sendStatus(err.status || 500);
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+  console.log('error firing, production');
   res.status(err.status || 500);
 });
 

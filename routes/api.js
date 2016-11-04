@@ -35,7 +35,10 @@ router.post('/newpost', function(req, res, next) {
 router.post('/newuser', function(req, res, next) {
   knex('users').where('username', req.body.username).then(function(results) {
     if (results.length >= 1) {
-      return false
+      var err = new Error()
+      err.status = 409
+      err.message = 'User already exists.'
+      next(err)
     } else {
       var hash = bcrypt.hashSync(req.body.password, 12)
       knex('users')

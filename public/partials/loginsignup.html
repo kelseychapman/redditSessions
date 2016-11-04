@@ -8,6 +8,12 @@
                 <div class="error" ng-show="authForm.username.$invalid && authForm.username.$dirty">
                     Username must be between 3 and 18 characters.
                 </div>
+                <div class="error" ng-show="userExistsBool">
+                    User already exists.
+                </div>
+                <div class="error" ng-show="genericErrorBool">
+                    An error occurred. Please try again.
+                </div>
             </div>
             <div ng-class="{'has-error':authForm.password.$invalid && authForm.password.$dirty, 'has-success': authForm.password.$valid}" class="form-group">
                 <label class=control-label class=control-label for="password">Password</label>
