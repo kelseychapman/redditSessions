@@ -45,16 +45,16 @@ app.controller('main', function($scope, postsService) {
 
 })
 
-app.controller('auth', function($scope, authService, $cookieStore ){
+app.controller('auth', function($scope, $cookieStore, authService) {
 
-$scope.userObj = {}
+  $scope.userObj = {}
 
-$scope.signup = function(obj){
-  authService.signup(obj)
-}
+  $scope.signup = function(obj) {
+    authService.signup(obj)
+  }
 
-$scope.login = function(obj){
-  authService.login(obj)
-}
+  $scope.login = function(obj) {
+    // authService.login(obj)
+  }
 
 })
