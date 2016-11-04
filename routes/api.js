@@ -12,6 +12,9 @@ router.get('/allposts', function(req, res, next) {
 });
 
 router.post('/newpost', function(req, res, next) {
+  if (!req.session.userInfo ){
+    console.log('Not authorized');
+  } else {
     knex('posts')
     .returning('*')
     .insert({
@@ -23,10 +26,50 @@ router.post('/newpost', function(req, res, next) {
     }).then(function(results) {
       res.send(results)
     })
-  })
-
-router.post('/signup', function(req, res, next){
-  console.log(req.body);
+  }
 })
+
+router.post('/signup', function(req, res, next) {
+  knex('users').where('username', req.body.username).then(function(results) {
+    if (results.length >= 1) {
+      console.log('User already exists!');
+    } else {
+      let hash = bcrypt.hashSync(req.body.password, 12)
+      knex('users')
+      .returning('*')
+      .insert({
+        username: req.body.username,
+        hashed_pw: hash
+      }).then(function(results){
+        let userSesh = results[0]
+        delete userSesh.hashed_pw
+        console.log('user sesh:' , userSesh);
+        req.session.userInfo = userSesh
+        res.send('User signed up!')
+      })
+    }
+  })
+})
+
+    // else {
+    //   var user = req.body;
+    //   var hash = bcrypt.hashSync(req.body.password, 12)
+    //   knex('users')
+    //     .returning('*')
+    //     .insert({
+    //       user_name: user.username,
+    //       first_name: user.firstname,
+    //       last_name: user.lastname,
+    //       password: hash,
+    //       is_admin: false
+    //     })
+    //     .then(function(results) {
+    //       let userSesh = results;
+    //       delete userSesh[0].password
+    //       req.session.userInfo = userSesh
+    //       console.log('setting user info (signup): ', userSesh);
+    //       res.redirect('/private')
+    //     })
+    // }
 
 module.exports = router;

@@ -17,6 +17,7 @@ app.service('authService', function($http){
   return {
     signup: function(userObj){
       return $http.post('/api/signup', userObj).then(function(response){
+        console.log(response.data);
       })
     }
   }
