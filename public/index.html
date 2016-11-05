@@ -38,7 +38,8 @@
                     </form>
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sorting By: {{sortDisplay}}
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sorting By:
+                                {{sortDisplay}}
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
@@ -46,12 +47,28 @@
                                 <li class="click" ng-click="sortBy('title')">Title</li>
                             </ul>
                         </li>
-                        <li ng-click="changeBool()"><a href="">+ Submit a post</a></li>
+                        <li ng-click="changeBool()">
+                            <a href="">+ Submit a post</a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a ng-show="userWelcome" href="#">Welcome, {{userWelcome}}!</a>
-                            <a ng-hide="userWelcome" href="#/loginsignup">Want to join? Login or signup in seconds.</a>
+                        <li  ng-show="userWelcome" class="dropdown">
+                            <a href="#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Welcome, {{userWelcome}}!
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Dashboard</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a ng-click="logout()" href="#/">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-hide="userWelcome">
+                            <a href="#/loginsignup">Want to join? Login or signup in seconds.</a>
                         </li>
                     </ul>
                 </div>
@@ -61,35 +78,35 @@
         </nav>
         <form name="postForm" ng-show="postFormBool" ng-submit="newPost(newPostObj)">
             <div ng-class="{'has-error':postForm.title.$invalid && postForm.title.$dirty, 'has-success': postForm.title.$valid}" class="form-group">
-              <label class="control-label" for="title">Title:</label>
-              <input class="form-control" id="title" ng-model="newPostObj.title" type="text" name="title" placeholder="Title" ng-minlength="3" ng-maxlength="255" required>
-              <div class="error" ng-show="postForm.title.$invalid && postForm.title.$dirty">
-                Title must be between 3 and 255 characters.
-              </div>
+                <label class="control-label" for="title">Title:</label>
+                <input class="form-control" id="title" ng-model="newPostObj.title" type="text" name="title" placeholder="Title" ng-minlength="3" ng-maxlength="255" required>
+                <div class="error" ng-show="postForm.title.$invalid && postForm.title.$dirty">
+                    Title must be between 3 and 255 characters.
+                </div>
             </div>
             <div ng-class="{'has-error':postForm.authorID.$invalid && postForm.authorID.$dirty, 'has-success': postForm.authorID.$valid}" class="form-group">
-              <label class=control-label class=control-label for="authorID">Author:</label>
-              <input class="form-control" id="authorID" ng-model="newPostObj.authorID" type="text" name="authorID" placeholder="Author ID" required>
-              <div class="error" ng-show="postForm.authorID.$invalid && postForm.authorID.$dirty">
-                Please enter a valid ID.
-              </div>
+                <label class=control-label class=control-label for="authorID">Author:</label>
+                <input class="form-control" id="authorID" ng-model="newPostObj.authorID" type="text" name="authorID" placeholder="Author ID" required>
+                <div class="error" ng-show="postForm.authorID.$invalid && postForm.authorID.$dirty">
+                    Please enter a valid ID.
+                </div>
             </div>
             <div ng-class="{'has-error':postForm.image.$invalid && postForm.image.$dirty, 'has-success': postForm.image.$valid}" class="form-group">
-              <label class=control-label for="image">Image source:</label>
-              <input type="text" class="form-control" id="image" ng-model="newPostObj.image" type="text" name="image" placeholder="Image source" ng-pattern="/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/" required>
-              <div class="error" ng-show="postForm.image.$invalid && postForm.image.$dirty">
-                Please enter a valid URL.
-              </div>
+                <label class=control-label for="image">Image source:</label>
+                <input type="text" class="form-control" id="image" ng-model="newPostObj.image" type="text" name="image" placeholder="Image source" ng-pattern="/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/" required>
+                <div class="error" ng-show="postForm.image.$invalid && postForm.image.$dirty">
+                    Please enter a valid URL.
+                </div>
             </div>
             <div ng-class="{'has-error':postForm.description.$invalid && postForm.description.$dirty, 'has-success': postForm.description.$valid && postForm.description.$dirty}" class="form-group">
-              <label class=control-label for="description">Description:</label>
-              <input class="form-control" id="description" ng-model="newPostObj.description" type="text" name="description" placeholder="Description" ng-maxlength="10000">
-              <div class="error" ng-show="postForm.description.$invalid && postForm.description.$dirty">
-                Please enter a valid description.
-              </div>
+                <label class=control-label for="description">Description:</label>
+                <input class="form-control" id="description" ng-model="newPostObj.description" type="text" name="description" placeholder="Description" ng-maxlength="10000">
+                <div class="error" ng-show="postForm.description.$invalid && postForm.description.$dirty">
+                    Please enter a valid description.
+                </div>
             </div>
             <input type="submit">
-          </form>
+        </form>
         <ng-view></ng-view>
     </body>
 </html>

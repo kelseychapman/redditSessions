@@ -11,6 +11,11 @@ app.controller('main', function($scope, $cookies, postsService, cookieService) {
     $scope.arr = results
   })
 
+  $scope.logout = function(){
+    $cookies.remove('redditSession')
+    $cookies.remove('redditSession.sig')
+  }
+
   $scope.newPost = function(obj) {
     postsService.newPost(obj).then(function(results) {
       $scope.newPostObj = {}
