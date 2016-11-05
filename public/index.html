@@ -50,7 +50,8 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#/loginsignup">Want to join? Login or signup in seconds.</a>
+                            <a ng-show="userWelcome" href="#">Welcome, {{userWelcome}}!</a>
+                            <a ng-hide="userWelcome" href="#/loginsignup">Want to join? Login or signup in seconds.</a>
                         </li>
                     </ul>
                 </div>

@@ -1,8 +1,11 @@
-app.controller('main', function($scope, postsService) {
+app.controller('main', function($scope, $cookies, postsService, cookieService) {
   $scope.newPostObj = {}
   $scope.postFormBool = false;
   $scope.sortType = '-voteCount'
   $scope.sortDisplay = "Votes"
+  if ($cookies.getAll().redditSession){
+    $scope.userWelcome = cookieService.decodeCookie($cookies.get('redditSession'))
+  }
 
   postsService.getPosts().then(function(results) {
     $scope.arr = results
@@ -45,9 +48,11 @@ app.controller('main', function($scope, postsService) {
 
 })
 
-app.controller('auth', function($scope, $cookieStore, authService) {
+
+app.controller('auth', function($scope, $cookies, authService) {
 
   $scope.userObj = {}
+
 
   $scope.signup = function(obj) {
     authService.signup(obj)
