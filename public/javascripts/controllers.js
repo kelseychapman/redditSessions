@@ -66,9 +66,6 @@ app.controller('main', function($scope, $rootScope, $cookies, postsService, cook
       $scope.sortDisplay = 'Title'
     }
   }
-
-
-
 })
 
 
@@ -85,6 +82,5 @@ app.controller('auth', function($scope, $cookies, authService) {
     authService.login(obj).then(function(response){
     })
   }
-
 
 })
