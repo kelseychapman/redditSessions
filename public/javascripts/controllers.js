@@ -1,15 +1,14 @@
 app.controller('main', function($scope, $rootScope, $cookies, postsService, cookieService) {
   $scope.newPostObj = {}
   $scope.searchBar = true;
-  $scope.sortType = '-voteCount'
-  $scope.sortDisplay = "Votes"
+  $scope.sortDisplay = "Title"
   $scope.cookies = $cookies.getAll()
 
   $scope.$watch('cookies', function() {
-      if ($cookies.getAll().redditSession) {
-        $scope.$emit('cookiesDetected')
-          $scope.userWelcome = cookieService.decodeCookie($cookies.get('redditSession'))
-      }
+    if ($cookies.getAll().redditSession) {
+      $scope.$emit('cookiesDetected')
+      $scope.userWelcome = cookieService.decodeCookie($cookies.get('redditSession'))
+    }
   })
 
   $scope.$on('cookiesDetected', function() {
@@ -51,7 +50,7 @@ app.controller('main', function($scope, $rootScope, $cookies, postsService, cook
   }
 
   $scope.changeBool = function() {
-    if ($scope.postFormBool == false) {
+    if (!$scope.postFormBool) {
       $scope.postFormBool = true;
     } else {
       $scope.postFormBool = false;
@@ -74,21 +73,17 @@ app.controller('auth', function($scope, $cookies, authService) {
   $scope.userObj = {}
 
   $scope.signup = function(obj) {
-    authService.signup(obj).then(function(response) {
-    })
+    authService.signup(obj).then(function(response) {})
   }
 
-  $scope.login = function(obj){
-    authService.login(obj).then(function(response){
-    })
+  $scope.login = function(obj) {
+    authService.login(obj).then(function(response) {})
   }
 
 })
 
-app.controller('dashboard', function($scope, userService){
-
-  userService.getUser().then(function(results){
+app.controller('dashboard', function($scope, userService) {
+  userService.getUser().then(function(results) {
     $scope.user = results[0]
   })
-
 })
