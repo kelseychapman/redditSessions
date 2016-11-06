@@ -55,7 +55,6 @@ router.post('/signup', function(req, res, next) {
       }).then(function(results){
         let userSesh = results[0]
         delete userSesh.hashed_pw
-        console.log('user sesh:' , userSesh);
         req.session.userInfo = userSesh
         res.send('User signed up!')
       })
@@ -66,6 +65,7 @@ router.post('/signup', function(req, res, next) {
 router.post('/login', function(req, res, next){
   knex('users').where('username', req.body.username).then(function(results){
     if (results.length < 1){
+      console.log('Not authorized');
     } else {
       let isValid = bcrypt.compareSync(req.body.password, results[0].hashed_pw)
       if (isValid){
