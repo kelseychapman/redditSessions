@@ -10,4 +10,9 @@ app.config(function($routeProvider){
     templateUrl: '../partials/loginsignup.html',
     controller: 'auth'
   })
+
+  .when('/dashboard', {
+    templateUrl: '../partials/dashboard.html',
+    controller: 'dashboard'
+  })
 })

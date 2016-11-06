@@ -39,3 +39,13 @@ app.service('cookieService', function($cookies, $location) {
     }
   }
 })
+
+app.service('userService', function($http){
+  return {
+    getUser: function(){
+      return $http.get('/api/userinfo').then(function(results){
+        return results.data
+      })
+    }
+  }
+})

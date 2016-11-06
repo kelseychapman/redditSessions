@@ -84,3 +84,11 @@ app.controller('auth', function($scope, $cookies, authService) {
   }
 
 })
+
+app.controller('dashboard', function($scope, userService){
+
+  userService.getUser().then(function(results){
+    $scope.user = results[0]
+  })
+
+})

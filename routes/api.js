@@ -11,6 +11,18 @@ router.get('/allposts', function(req, res, next) {
     })
 });
 
+router.get('/userinfo', function(req, res, next){
+  console.log('whoo');
+  if (!req.session.userInfo){
+    console.log('Not authorized');
+  } else {
+    knex('users').where('id', req.session.userInfo.id)
+    .then(function(results){
+      res.send(results)
+    })
+  }
+})
+
 router.post('/newpost', function(req, res, next) {
   if (!req.session.userInfo ){
     console.log('Not authorized');
@@ -67,26 +79,5 @@ router.post('/login', function(req, res, next){
     }
   })
 })
-
-    // else {
-    //   var user = req.body;
-    //   var hash = bcrypt.hashSync(req.body.password, 12)
-    //   knex('users')
-    //     .returning('*')
-    //     .insert({
-    //       user_name: user.username,
-    //       first_name: user.firstname,
-    //       last_name: user.lastname,
-    //       password: hash,
-    //       is_admin: false
-    //     })
-    //     .then(function(results) {
-    //       let userSesh = results;
-    //       delete userSesh[0].password
-    //       req.session.userInfo = userSesh
-    //       console.log('setting user info (signup): ', userSesh);
-    //       res.redirect('/private')
-    //     })
-    // }
 
 module.exports = router;
