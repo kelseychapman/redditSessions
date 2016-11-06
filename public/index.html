@@ -18,7 +18,6 @@
     <body ng-controller="main" class="container-fluid">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
@@ -28,8 +27,6 @@
                     </button>
                     <a class="navbar-brand" ng-click="showSearch()" href="#/">Reddit</a>
                 </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
@@ -51,11 +48,8 @@
                             <a href="">+ Submit a post</a>
                         </li>
                     </ul>
-
                     <ul class="nav navbar-nav navbar-right">
-
                         <li  ng-show="userWelcome" class="dropdown">
-
                             <a href="#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Welcome, {{userWelcome}}!
                                 <span class="caret"></span>
@@ -75,9 +69,7 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
         </nav>
         <form name="postForm" ng-show="postFormBool" ng-submit="newPost(newPostObj)">
             <div ng-class="{'has-error':postForm.title.$invalid && postForm.title.$dirty, 'has-success': postForm.title.$valid}" class="form-group">
@@ -85,13 +77,6 @@
                 <input class="form-control" id="title" ng-model="newPostObj.title" type="text" name="title" placeholder="Title" ng-minlength="3" ng-maxlength="255" required>
                 <div class="error" ng-show="postForm.title.$invalid && postForm.title.$dirty">
                     Title must be between 3 and 255 characters.
-                </div>
-            </div>
-            <div ng-class="{'has-error':postForm.authorID.$invalid && postForm.authorID.$dirty, 'has-success': postForm.authorID.$valid}" class="form-group">
-                <label class=control-label class=control-label for="authorID">Author:</label>
-                <input class="form-control" id="authorID" ng-model="newPostObj.authorID" type="text" name="authorID" placeholder="Author ID" required>
-                <div class="error" ng-show="postForm.authorID.$invalid && postForm.authorID.$dirty">
-                    Please enter a valid ID.
                 </div>
             </div>
             <div ng-class="{'has-error':postForm.image.$invalid && postForm.image.$dirty, 'has-success': postForm.image.$valid}" class="form-group">
