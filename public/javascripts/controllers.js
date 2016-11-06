@@ -1,11 +1,20 @@
-app.controller('main', function($scope, $cookies, postsService, cookieService) {
+app.controller('main', function($scope, $rootScope, $cookies, postsService, cookieService) {
   $scope.newPostObj = {}
-  $scope.postFormBool = false;
+  $scope.searchBar = true;
   $scope.sortType = '-voteCount'
   $scope.sortDisplay = "Votes"
   if ($cookies.getAll().redditSession){
     $scope.userWelcome = cookieService.decodeCookie($cookies.get('redditSession'))
   }
+
+  $scope.showSearch = function(){
+    $scope.searchBar = true
+  }
+
+  $scope.hideSearch = function(){
+    $scope.searchBar = false
+  }
+
 
   postsService.getPosts().then(function(results) {
     $scope.arr = results
@@ -60,7 +69,9 @@ app.controller('auth', function($scope, $cookies, authService) {
 
 
   $scope.signup = function(obj) {
-    authService.signup(obj)
+    authService.signup(obj).then(function(response){
+      
+    })
   }
 
   $scope.login = function(obj) {

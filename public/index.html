@@ -26,7 +26,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#/">Reddit</a>
+                    <a class="navbar-brand" ng-click="showSearch()" href="#/">Reddit</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,7 +36,7 @@
                             <input ng-model="search" type="text" class="form-control" placeholder="Search">
                         </div>
                     </form>
-                    <ul class="nav navbar-nav">
+                    <ul ng-show="searchBar" class="nav navbar-nav">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sorting By:
                                 {{sortDisplay}}
@@ -68,7 +68,7 @@
                             </ul>
                         </li>
                         <li ng-hide="userWelcome">
-                            <a href="#/loginsignup">Want to join? Login or signup in seconds.</a>
+                            <a ng-click="hideSearch()" href="#/loginsignup">Want to join? Login or signup in seconds.</a>
                         </li>
                     </ul>
                 </div>
