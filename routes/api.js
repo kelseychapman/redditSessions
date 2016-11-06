@@ -51,6 +51,23 @@ router.post('/signup', function(req, res, next) {
   })
 })
 
+router.post('/login', function(req, res, next){
+  knex('users').where('username', req.body.username).then(function(results){
+    if (results.length < 1){
+    } else {
+      let isValid = bcrypt.compareSync(req.body.password, results[0].hashed_pw)
+      if (isValid){
+        let userSesh = results[0]
+        delete userSesh.hashed_pw
+        req.session.userInfo = userSesh
+        res.send('User logged in!')
+      } else {
+        console.log('wrong password');
+      }
+    }
+  })
+})
+
     // else {
     //   var user = req.body;
     //   var hash = bcrypt.hashSync(req.body.password, 12)

@@ -3,26 +3,35 @@ app.controller('main', function($scope, $rootScope, $cookies, postsService, cook
   $scope.searchBar = true;
   $scope.sortType = '-voteCount'
   $scope.sortDisplay = "Votes"
-  if ($cookies.getAll().redditSession){
-    $scope.userWelcome = cookieService.decodeCookie($cookies.get('redditSession'))
-  }
+  $scope.cookies = $cookies.getAll()
 
-  $scope.showSearch = function(){
+  $scope.$watch('cookies', function() {
+      if ($cookies.getAll().redditSession) {
+        $scope.$emit('cookiesDetected')
+          $scope.userWelcome = cookieService.decodeCookie($cookies.get('redditSession'))
+      }
+  })
+
+  $scope.$on('cookiesDetected', function() {
+    $scope.userWelcome = cookieService.decodeCookie($cookies.get('redditSession'))
+  })
+
+  $scope.showSearch = function() {
     $scope.searchBar = true
   }
 
-  $scope.hideSearch = function(){
+  $scope.hideSearch = function() {
     $scope.searchBar = false
   }
-
 
   postsService.getPosts().then(function(results) {
     $scope.arr = results
   })
 
-  $scope.logout = function(){
+  $scope.logout = function() {
     $cookies.remove('redditSession')
     $cookies.remove('redditSession.sig')
+    $scope.userWelcome = null
   }
 
   $scope.newPost = function(obj) {
@@ -67,15 +76,15 @@ app.controller('auth', function($scope, $cookies, authService) {
 
   $scope.userObj = {}
 
-
   $scope.signup = function(obj) {
-    authService.signup(obj).then(function(response){
-      
+    authService.signup(obj).then(function(response) {
     })
   }
 
-  $scope.login = function(obj) {
-    // authService.login(obj)
+  $scope.login = function(obj){
+    authService.login(obj).then(function(response){
+    })
   }
+
 
 })

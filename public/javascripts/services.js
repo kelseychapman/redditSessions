@@ -13,17 +13,22 @@ app.service('postsService', function($http) {
   }
 })
 
-app.service('authService', function($http) {
+app.service('authService', function($http, $location) {
   return {
     signup: function(userObj) {
       return $http.post('/api/signup', userObj).then(function(response) {
-        return response
+        $location.path('/')
       })
     },
+    login: function(userObj) {
+      return $http.post('/api/login', userObj).then(function(response){
+        $location.path('/')
+      })
+    }
   }
 })
 
-app.service('cookieService', function() {
+app.service('cookieService', function($cookies, $location) {
   return {
     decodeCookie: function(cookie){
       let base64decoded = atob(cookie)
