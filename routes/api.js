@@ -18,7 +18,7 @@ router.post('/newpost', function(req, res, next) {
     knex('posts')
     .returning('*')
     .insert({
-      user_id: req.body.authorID,
+      user_id: req.session.userInfo.id,
       title: req.body.title,
       body: req.body.description,
       img: req.body.image,
